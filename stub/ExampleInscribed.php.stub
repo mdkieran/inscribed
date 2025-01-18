@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Inscribed;
+
+use Mdkieran\Inscribed\Gadget\Inscribed;
+
+class ExampleInscribed extends Inscribed
+{
+    /**
+     * The key that the data will reside under (within JavaScript).
+     */
+    public string $key = 'example';
+
+    /**
+     * The location of the output file (within the public path).
+     */
+    public string $tail = 'build/inscribed/example.js';
+
+    /**
+     * The data being passed to JavaScript.
+     */
+    public function data() : array
+    {
+        return [
+            'currency' => 3.33,
+            'languages' => [
+                'en', 'es', 'fr', 'zh',
+            ],
+            'online' => true,
+            'quantity' => 7,
+            'version' => '1.2.3',
+            'settings' => (object) [
+                'notifications' => false,
+                'timezone' => 'utc',
+                'volume' => 80
+            ],
+        ];
+    }
+}

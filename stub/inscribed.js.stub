@@ -1,0 +1,84 @@
+import ObjectHelper from "./ObjectHelper";
+
+/**
+* Using dot notation, retrieve a value from the window.Inscribed object.
+* You may provide a fallback if the key is not found.
+*
+* @param {string} key - The dot-notated key (e.g., "example.version").
+* @param {*} fallback - The fallback value if the key is not found.
+* @returns {*} - The requested value from window.Inscribed or the fallback.
+*/
+export function inscribed(key, fallback = null) {
+    let result = window.Inscribed;
+
+    if (typeof result !== 'object' || result === null) {
+        console.warn('Inscribed not found');
+        return fallback;
+    }
+
+    if (typeof key !== 'string') {
+        return fallback;
+    }
+
+    const keys = key.split('.');
+
+    for (const key of keys) {
+        if (
+            result &&
+            typeof result === 'object' &&
+            Object.hasOwn(result, key)
+        ) {
+            result = result[key];
+        } else {
+            return fallback;
+        }
+    }
+
+    return result;
+}
+
+/**
+* Runs tests for the `inscribed` function and provides a summary of results.
+*
+* @function
+* @returns {void} Logs test results to the console.
+*/
+export function test() {
+    let tests = [
+        // Regular usage
+        [inscribed('example.currency'), 3.33],
+        [JSON.stringify(inscribed('example.languages')), JSON.stringify(['en', 'es', 'fr', 'zh'])],
+        [inscribed('example.online'), true],
+        [inscribed('example.quantity'), 7],
+        [inscribed('example.version'), '1.2.3'],
+        [JSON.stringify(inscribed('example.settings')), JSON.stringify({notifications: false, timezone: 'utc', volume: 80})],
+        [inscribed('example.settings.notifications'), false],
+        [inscribed('example.settings.timezone'), 'utc'],
+        [inscribed('example.settings.volume'), 80],
+
+        // Edge cases
+        [inscribed('example.currency.whoops', 0.00), 0.00],
+        [inscribed('example..whoops..currency', 777), 777],
+        [inscribed('example.online.', false), false],
+        [inscribed(null, 'null test'), 'null test'],
+        [inscribed(undefined, 'undefined test'), 'undefined test'],
+        [inscribed('', 'empty test'), 'empty test'],
+        [inscribed(false, 'false test'), 'false test'],
+        [inscribed('null fallback', null), null],
+        [inscribed('undefined fallback', undefined), null],
+    ];
+
+    let passes = 0;
+
+    tests.forEach(([actual, expected], index) => {
+        const result = actual === expected;
+
+        console.info(`${index + 1}: ${result ? 'PASS' : 'FAIL'} (${actual} | ${expected})`);
+
+        if (result) {
+            passes += 1;
+        }
+    });
+
+    console.info(`\n${passes}/${tests.length} tests passed.\n `);
+}
