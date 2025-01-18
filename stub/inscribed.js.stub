@@ -1,5 +1,3 @@
-import ObjectHelper from "./ObjectHelper";
-
 /**
 * Using dot notation, retrieve a value from the window.Inscribed object.
 * You may provide a fallback if the key is not found.
