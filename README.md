@@ -4,20 +4,31 @@ Share your Laravel constants with JavaScript.
 
 ## About
 
-This lightweight Laravel package makes it easy to share your application's constants, config values, and other static data with your frontend in an organized and efficient way. The data is "inscribed" onto the window object, where it lives for the lifecycle of the page.
+This lightweight Laravel package makes it easy to share your application's constants, config values, and other static data with your frontend in an organized and efficient way. The data is "inscribed" onto the browser's window object, where it lives for the lifecycle of the page.
 
-By embedding static data directly into the initial page load, this package eliminates the need for repetitive API calls, reducing overhead and improving performance. For efficiency, caching is used in production, while in development, it generates inline JavaScript for easy editing.
+During development, the `@inscribed` blade directive will output something like:
 
-Optionally, there's a JavaScript helper function that you can publish to simplify retrieving the inscribed data on the JavaScript side.
+```html
+<script>window.Inscribed||={};window.Inscribed['example']=JSON.parse('{\u0022attribute\u0022:\u0022value\u0022}');</script>
+```
+
+During production, so that the browser can benefit from caching, you'll see something like:
+
+```html
+<script src="https://project.local/build/inscribed/example.js?v=1737580177"></script>
+```
+
+Additionally, there's a JavaScript helper function that you can publish to your project which helps you to retrieve the window object's "inscribed" data.
 
 ## Features
 
-- Share static data from Laravel to your frontend.
-- Group data to keep it organized.
-- Generates inline JavaScript when in development mode for easy editing.
-- Caching is used in production to reduce both client and server load.
-- An optional JavaScript helper is available to easily access inscribed data.
-- Works seamlessly with Inertia.js and probably many other frontend toolkits.
+This package allows you to:
+
+- Share Laravel constants with JavaScript.
+- Organize your constants into groups.
+- Compile your constants for production use.
+- Use it with Inertia.js or any other frontend.
+- Retrieve the data using a helper function (optional).
 
 ## Installation
 
