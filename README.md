@@ -32,7 +32,7 @@ composer require mdkieran/inscribed
 The following command will publish `App\Inscribed\ExampleInscribed.php` to your project:
 
 ```bash
-php artisan vendor:publish --tag=inscribed-php
+php artisan vendor:publish --tag=mdkieran-inscribed-php
 ```
 
 ### [3/5] Register the example class
@@ -76,7 +76,7 @@ Once you've included the blade directive, you should be able to type `window.Ins
 The following command will publish `resources/js/inscribed.js` to your project, which can help you to easily retrieve the "inscribed" data. You may integrate it into your project as you wish:
 
 ```bash
-php artisan vendor:publish --tag=inscribed-js
+php artisan vendor:publish --tag=mdkieran-inscribed-js
 ```
 
 ## Caching

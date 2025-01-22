@@ -46,12 +46,12 @@ class InscribedProvider extends ServiceProvider
 
         $this->publishes([
             $startdir.'/ExampleInscribed.php.stub' => app_path('Inscribed/ExampleInscribed.php'),
-        ], 'inscribed-php');
+        ], 'mdkieran-inscribed-php');
 
         // Optional: A helper function for retrieving inscribed data.
         $this->publishes([
             $startdir.'/inscribed.js.stub' => resource_path('js/inscribed.js')
-        ], 'inscribed-js');
+        ], 'mdkieran-inscribed-js');
     }
 
     /**
