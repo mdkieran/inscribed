@@ -26,10 +26,12 @@ class ClearCommand extends Command
      */
     public function handle()
     {
-        $fqns = app('inscribed.fqns');
+        if (app()->bound('inscribed.fqns')) {
+            $fqns = app('inscribed.fqns');
 
-        foreach ($fqns as $fqn) {
-            app($fqn)->drop();
+            foreach ($fqns as $fqn) {
+                app($fqn)->drop();
+            }
         }
 
         File::delete(base_path('bootstrap/cache/inscribed.php'));

@@ -26,6 +26,12 @@ class CacheCommand extends Command
      */
     public function handle()
     {
+        if (!app()->bound('inscribed.fqns')) {
+            $this->components->error('No Inscribed classes found.');
+
+            return;
+        }
+
         $fqns = app('inscribed.fqns');
 
         $tails = [];

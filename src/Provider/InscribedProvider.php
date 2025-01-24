@@ -71,9 +71,10 @@ class InscribedProvider extends ServiceProvider
             }
 
             // Generated every time.
-            return "<?php echo collect(app('inscribed.fqns'))".
+            return "<?php if (app()->bound('inscribed.fqns')) { ".
+                "echo collect(app('inscribed.fqns'))".
                 "->map(fn(\$fqn) => app(\$fqn)->inline())".
-                "->implode(''); ?>";
+                "->implode(''); } ?>";
         });
     }
 }
