@@ -99,6 +99,8 @@ php artisan inscribed:cache
 php artisan inscribed:clear
 ```
 
+**Note:** After running either of the above commands you will need to run: `php artisan view:clear` to ensure the new markup can be included.
+
 Or if you prefer, there's integration with Laravel's optimize commands so you could also run:
 
 ```bash
